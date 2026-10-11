@@ -1,16 +1,13 @@
 ----------------------------------------------------------------
-Tue Sep 03 23:31:39 IST 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0191-b90c-9ce9-000002043728 
-on database directory memory:C:\Users\HP\Desktop\courseportal\d9ea615f-4335-43cc-8c6f-ff627654825c with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
-Loaded from file:/C:/Users/HP/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+Sun Oct 11 20:44:55 IST 2026:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-01a1-2b87-dfde-000001f4df00 
+on database directory memory:C:\Users\taniy\OneDrive\Documents\Course_Management_Portal\courseportal\courseportal with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/taniy/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=15.0.1+9-18
-user.dir=C:\Users\HP\Desktop\courseportal
-os.name=Windows 10
+java.runtime.version=17.0.12+8-LTS-286
+user.dir=C:\Users\taniy\OneDrive\Documents\Course_Management_Portal\courseportal
+os.name=Windows 11
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
-----------------------------------------------------------------
-Tue Sep 03 23:31:48 IST 2024:
-Shutting down instance a816c00e-0191-b90c-9ce9-000002043728 on database directory memory:C:\Users\HP\Desktop\courseportal\d9ea615f-4335-43cc-8c6f-ff627654825c with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@73d16e93 

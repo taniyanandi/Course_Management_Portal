@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta name="description" content="A thoughtful home for the courses you're building and the skills you're growing.">
+  <title>Coursecraft — Learning, in good company</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="/" aria-label="Coursecraft home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <span>coursecraft<span class="brand-period">.</span></span>
+      </a>
+
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav-list">
+        <a class="nav-link active" href="#overview"><span class="nav-icon" aria-hidden="true">◫</span> Overview</a>
+        <a class="nav-link" href="#your-learning"><span class="nav-icon" aria-hidden="true">▤</span> Your learning</a>
+        <button class="nav-link nav-button" id="sidebar-topics" type="button"><span class="nav-icon" aria-hidden="true">⌘</span> Topics <span class="nav-count" id="sidebar-topic-count">0</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-note">
+          <span class="note-spark" aria-hidden="true">✳</span>
+          <p>A little progress, every day.</p>
+          <span class="note-caption">Your next great idea starts here.</span>
+        </div>
+        <div class="profile">
+          <div class="avatar" aria-hidden="true">Y</div>
+          <div class="profile-copy"><strong>Your workspace</strong><span>Personal learning</span></div>
+          <span class="profile-menu" aria-hidden="true">···</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="overview">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><span class="crumb-slash">/</span><strong>Overview</strong></div>
+        <div class="topbar-actions">
+          <span class="api-status" id="api-status"><span class="status-dot"></span><span>Connecting</span></span>
+          <button class="icon-button" id="refresh-button" type="button" aria-label="Refresh courses" title="Refresh">↻</button>
+          <div class="avatar avatar-small" aria-label="Your workspace">Y</div>
+        </div>
+      </header>
+
+      <div class="page-content">
+        <section class="welcome-row">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> YOUR LEARNING SPACE</div>
+            <h1>Make room for <span>what's next.</span></h1>
+            <p class="welcome-copy">A home for the ideas you're exploring and the skills you're building.</p>
+          </div>
+          <button class="button button-primary" id="new-topic-button" type="button"><span class="button-plus">+</span> New topic</button>
+        </section>
+
+        <section class="stats-grid" aria-label="Learning overview">
+          <article class="stat-card stat-accent">
+            <div class="stat-top"><span class="stat-label">YOUR TOPICS</span><span class="stat-icon icon-violet" aria-hidden="true">⌘</span></div>
+            <div class="stat-value" id="stat-topics">—</div>
+            <div class="stat-foot">Curiosity, organized</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">COURSES TO EXPLORE</span><span class="stat-icon icon-blue" aria-hidden="true">▤</span></div>
+            <div class="stat-value" id="stat-courses">—</div>
+            <div class="stat-foot">All in one place</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span class="stat-label">YOUR NEXT CHAPTER</span><span class="stat-icon icon-amber" aria-hidden="true">✳</span></div>
+            <div class="stat-value stat-text" id="stat-next">Start anywhere</div>
+            <div class="stat-foot">Pick up where curiosity takes you</div>
+          </article>
+        </section>
+
+        <section class="section-block" id="your-learning">
+          <div class="section-heading">
+            <div>
+              <div class="section-kicker">A good place to begin</div>
+              <h2>Your topics <span id="topic-heading-count" class="heading-count"></span></h2>
+            </div>
+            <button class="text-button" id="view-all-button" type="button">View all <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="topic-grid" id="topic-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="section-block courses-section" id="courses-section">
+          <div class="section-heading course-heading">
+            <div>
+              <div class="section-kicker">Curated for your curiosity</div>
+              <h2 id="courses-title">Courses <span id="course-heading-count" class="heading-count"></span></h2>
+            </div>
+            <div class="course-toolbar">
+              <label class="search-box">
+                <span aria-hidden="true">⌕</span>
+                <input id="course-search" type="search" placeholder="Find a course..." autocomplete="off" aria-label="Search courses">
+              </label>
+              <button class="button button-secondary" id="new-course-button" type="button" disabled><span class="button-plus">+</span> Add course</button>
+            </div>
+          </div>
+          <div class="filter-row" id="topic-filters" aria-label="Filter courses by topic"></div>
+          <div class="course-grid" id="course-grid" aria-live="polite"></div>
+        </section>
+
+        <footer class="page-footer">
+          <span><span class="footer-mark">✳</span> Keep following what fascinates you.</span>
+          <span>Made for the lifelong learner.</span>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+  <dialog class="modal" id="editor-modal" aria-labelledby="modal-title">
+    <form id="editor-form">
+      <div class="modal-header">
+        <div><div class="section-kicker" id="modal-kicker">GROW YOUR LEARNING SPACE</div><h2 id="modal-title">New topic</h2></div>
+        <button class="icon-button modal-close" type="button" id="modal-close" aria-label="Close dialog">×</button>
+      </div>
+      <div class="form-fields" id="form-fields"></div>
+      <div class="modal-actions">
+        <button class="button button-secondary" type="button" id="modal-cancel">Cancel</button>
+        <button class="button button-primary" type="submit" id="modal-submit">Create topic</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>

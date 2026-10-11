@@ -1,14 +1,18 @@
 package com.courseportal.courseportal;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-
-    @Entity
+@Entity
+@Table(name = "courses")
 public class Course {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String name;
   private String description;
@@ -54,6 +58,10 @@ public class Course {
 
   public void setTopic(Topic topic) {
     this.topic = topic;
+  }
+
+  public Topic getTopic() {
+    return topic;
   }
     
 }

@@ -1,38 +1,40 @@
-# Getting Started
+# Coursecraft
 
-### Reference Documentation
-For further reference, please consider the following sections:
+Coursecraft is a Spring Boot course-management app with a responsive web dashboard and a REST API for topics and courses.
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/3.2.8/maven-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/3.2.8/maven-plugin/reference/html/#build-image)
-* [Thymeleaf](https://docs.spring.io/spring-boot/docs/3.2.8/reference/htmlsingle/index.html#web.servlet.spring-mvc.template-engines)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.2.8/reference/htmlsingle/index.html#web)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/3.2.8/reference/htmlsingle/index.html#data.sql.jpa-and-spring-data)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/3.2.8/reference/htmlsingle/index.html#using.devtools)
-* [Spring Reactive Web](https://docs.spring.io/spring-boot/docs/3.2.8/reference/htmlsingle/index.html#web.reactive)
-* [Spring Web Services](https://docs.spring.io/spring-boot/docs/3.2.8/reference/htmlsingle/index.html#io.webservices)
-* [Spring Security](https://docs.spring.io/spring-boot/docs/3.2.8/reference/htmlsingle/index.html#web.security)
-* [OAuth2 Client](https://docs.spring.io/spring-boot/docs/3.2.8/reference/htmlsingle/index.html#web.security.oauth2.client)
+## Run locally
 
-### Guides
-The following guides illustrate how to use some features concretely:
+Requirements: Java 11 or newer.
 
-* [Handling Form Submission](https://spring.io/guides/gs/handling-form-submission/)
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-* [Building a Reactive RESTful Web Service](https://spring.io/guides/gs/reactive-rest-service/)
-* [Producing a SOAP web service](https://spring.io/guides/gs/producing-web-service/)
-* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
-* [Spring Boot and OAuth2](https://spring.io/guides/tutorials/spring-boot-oauth2/)
-* [Authenticating a User with LDAP](https://spring.io/guides/gs/authenticating-ldap/)
+From this directory, start the app with the included Maven wrapper:
 
-### Maven Parent overrides
+```powershell
+.\mvnw.cmd spring-boot:run
+```
 
-Due to Maven's design, elements are inherited from the parent POM to the project POM.
-While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the parent.
-To prevent this, the project POM contains empty overrides for these elements.
-If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
+Open [http://localhost:8084](http://localhost:8084). The app uses an embedded, in-memory Derby database; data is reset when the application stops.
+
+Run the test suite:
+
+```powershell
+.\mvnw.cmd test
+```
+
+## API
+
+All endpoints return JSON. Course creation and updates require a non-empty `name` and `description`; topic creation and updates require a non-empty `course`.
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/topics` | List topics |
+| `POST` | `/topics` | Create a topic: `{"course":"Computer Science"}` |
+| `GET` | `/topics/{id}` | Get a topic |
+| `PUT` | `/topics/{id}` | Update a topic |
+| `DELETE` | `/topics/{id}` | Delete a topic and its courses |
+| `GET` | `/topics/{topicId}/courses` | List a topic's courses |
+| `POST` | `/topics/{topicId}/courses` | Create a course: `{"name":"Distributed Systems","description":"..."}` |
+| `GET` | `/topics/{topicId}/courses/{id}` | Get a course |
+| `PUT` | `/topics/{topicId}/courses/{id}` | Update a course |
+| `DELETE` | `/topics/{topicId}/courses/{id}` | Delete a course |
+| `GET` | `/topic/{name}/courses` | List courses by topic name |
 
