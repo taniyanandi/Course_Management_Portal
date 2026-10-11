@@ -12,7 +12,7 @@ From this directory, start the app with the included Maven wrapper:
 .\mvnw.cmd spring-boot:run
 ```
 
-Open [http://localhost:8084](http://localhost:8084). The app uses an embedded, in-memory Derby database; data is reset when the application stops.
+Open [http://localhost:8084](http://localhost:8084). The app uses an embedded, in-memory H2 database; data is reset when the application stops.
 
 Run the test suite:
 
@@ -37,4 +37,3 @@ All endpoints return JSON. Course creation and updates require a non-empty `name
 | `PUT` | `/topics/{topicId}/courses/{id}` | Update a course |
 | `DELETE` | `/topics/{topicId}/courses/{id}` | Delete a course |
 | `GET` | `/topic/{name}/courses` | List courses by topic name |
-
