@@ -1,12 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.courseportal.courseportal.CourseportalApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 48.141 s <<< FAILURE! - in com.courseportal.courseportal.CourseportalApplicationTests
-courseAndTopicEndpointsSupportCompleteCrudLifecycle  Time elapsed: 0.666 s  <<< ERROR!
-java.lang.Error: 
-Unresolved compilation problems: 
-	The method read(String, String, Predicate...) in the type JsonPath is not applicable for the arguments (String, String, Class<Integer>)
-	The method read(String, String, Predicate...) in the type JsonPath is not applicable for the arguments (String, String, Class<Integer>)
-
-	at com.courseportal.courseportal.CourseportalApplicationTests.courseAndTopicEndpointsSupportCompleteCrudLifecycle(CourseportalApplicationTests.java:33)
-
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 33.112 s - in com.courseportal.courseportal.CourseportalApplicationTests

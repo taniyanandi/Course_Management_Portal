@@ -34,6 +34,10 @@ class CourseportalApplicationTests {
                 topicResult.getResponse().getContentAsString(), "$.id");
         String topicId = topicIdValue.toString();
 
+        mockMvc.perform(get("/topics"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].course").value("Computer Science"));
+
         mockMvc.perform(get("/topics/{id}", topicId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.course").value("Computer Science"));
@@ -54,6 +58,14 @@ class CourseportalApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Distributed Systems"));
 
+        mockMvc.perform(get("/topic/{name}/courses", "Computer Science"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name").value("Distributed Systems"));
+
+        mockMvc.perform(get("/topics/{topicId}/courses/{id}", topicId, courseId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.description").value("Learn to design resilient systems."));
+
         mockMvc.perform(put("/topics/{topicId}/courses/{id}", topicId, courseId)
                         .contentType("application/json")
                         .content("{\"name\":\"Reliable Systems\",\"description\":\"Updated course description.\"}"))
@@ -62,6 +74,14 @@ class CourseportalApplicationTests {
 
         mockMvc.perform(delete("/topics/{topicId}/courses/{id}", topicId, courseId))
                 .andExpect(status().isNoContent());
+
+        MvcResult secondCourseResult = mockMvc.perform(post("/topics/{id}/courses", topicId)
+                        .contentType("application/json")
+                        .content("{\"name\":\"Cloud Computing\",\"description\":\"Explore cloud platforms.\"}"))
+                .andExpect(status().isCreated())
+                .andReturn();
+        Object secondCourseId = com.jayway.jsonpath.JsonPath.read(
+                secondCourseResult.getResponse().getContentAsString(), "$.id");
 
         mockMvc.perform(put("/topics/{id}", topicId)
                         .contentType("application/json")
@@ -73,6 +93,9 @@ class CourseportalApplicationTests {
                 .andExpect(status().isNoContent());
 
         mockMvc.perform(get("/topics/{id}", topicId))
+                .andExpect(status().isNotFound());
+
+        mockMvc.perform(get("/topics/{topicId}/courses/{id}", topicId, secondCourseId))
                 .andExpect(status().isNotFound());
     }
 
@@ -86,6 +109,23 @@ class CourseportalApplicationTests {
         mockMvc.perform(post("/topics/{id}/courses", 999999)
                         .contentType("application/json")
                         .content("{\"name\":\"Course\",\"description\":\"Description\"}"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void legacyTopicDeleteEndpointRemainsFunctional() throws Exception {
+        MvcResult topicResult = mockMvc.perform(post("/topics")
+                        .contentType("application/json")
+                        .content("{\"course\":\"Legacy topic\"}"))
+                .andExpect(status().isCreated())
+                .andReturn();
+        Object topicId = com.jayway.jsonpath.JsonPath.read(
+                topicResult.getResponse().getContentAsString(), "$.id");
+
+        mockMvc.perform(get("/topics/delete/{course}", "Legacy topic"))
+                .andExpect(status().isNoContent());
+
+        mockMvc.perform(get("/topics/{id}", topicId))
                 .andExpect(status().isNotFound());
     }
 }
